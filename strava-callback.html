@@ -1,0 +1,15 @@
+<html>
+<head>
+  <script type="text/javascript">
+    // Capture the authorization code from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const authorizationCode = urlParams.get('code');
+
+    // Redirect to your app's custom scheme with the authorization code
+    window.location.href = `hootcycle://auth?code=${authorizationCode}`;
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
