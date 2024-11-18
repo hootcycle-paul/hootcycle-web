@@ -61,6 +61,11 @@ section {
   text-align: center;
 }
 
+.email {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
 .about, .features, .privacy-policy {
   margin: 0 auto;
   max-width: 900px;
