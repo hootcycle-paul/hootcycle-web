@@ -6,7 +6,9 @@
   <title>Redirecting...</title>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+    console.log("dom loaded")
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const fallbackURL = "https://www.hootcycle.com"
 
       // Define app store URLs
       const iosAppStoreURL = "https://apps.apple.com/us/app/hootcycle/id6737158892"; // Replace with your app's App Store URL
@@ -15,12 +17,12 @@
       if (/android/i.test(userAgent)) {
         // Redirect to Google Play Store for Android
         // window.location.href = androidPlayStoreURL;
-        window.location.href = fallbackURL;
+        window.location.replace(fallbackURL);
       } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         // Redirect to App Store for iOS
-        window.location.href = iosAppStoreURL;
+        window.location.replace(iosAppStoreURL);
       } else {
-        window.location.href = fallbackURL;
+        window.location.replace(fallbackURL);
       }
     });
   </script>
