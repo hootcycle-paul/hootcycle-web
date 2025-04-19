@@ -1,117 +1,612 @@
 /* General styles */
+:root {
+  --primary-color: #ff4500;
+  --primary-hover: #ff6a33;
+  --secondary-color: #1e90ff;
+  --text-color: #ffffff;
+  --bg-color: #000000;
+  --card-bg: #191919;
+  --section-bg: #111111;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #000;
-  color: #fff;
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 h1 {
   font-size: 2.5rem;
   text-align: center;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
+  letter-spacing: -1px;
+  color: var(--primary-color);
+  animation: titleFade 1.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 3px;
+  background: var(--primary-color);
+  bottom: -6px;
+  left: 20%;
+  border-radius: 2px;
 }
 
 p {
   font-size: 1.1rem;
   line-height: 1.5;
-  margin: 0 1rem;
+  margin: 0 1rem 0.8rem;
+  opacity: 0.9;
 }
 
+/* Splash screen */
 .splash-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 60vh;
   padding: 1rem;
-  background-color: #000;
-  color: #fff;
+  background: #000000;
+  color: var(--text-color);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-screen::before {
+  content: none;
+}
+
+.splash-screen .logo {
+  position: relative;
+  margin-bottom: 0.5rem;
+  /* animation: logoFloat 2s ease-in-out infinite alternate; */
 }
 
 .splash-screen .logo img {
-  width: 80px;
+  width: 70px;
+  height: auto;
+  filter: none;
+  transition: transform 0.3s ease;
+}
+
+.splash-screen .logo img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.splash-screen h1 {
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+  font-size: 2.2rem;
+}
+
+.splash-screen p {
+  margin-bottom: 0.7rem;
+  font-size: 1.1rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
 }
 
 .splash-screen .app-buttons {
-  margin-top: 20px;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  opacity: 0;
+  animation: slideUp 1s ease-in-out 0.8s forwards;
+}
+
+.app-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.store-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .store-button {
-  background-color: #ff4500;
-  color: white;
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  margin: 10px;
   display: inline-block;
-  font-size: 1rem;
-  width: 80%;
-  max-width: 300px;
-  text-align: center;
+  margin: 3px;
 }
 
+.store-button img {
+  height: 60px;
+  width: auto;
+  transition: transform 0.2s ease;
+}
+
+/* Google Play badge needs specific sizing */
+.store-button img[alt="Get it on Google Play"] {
+  height: 64px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.store-button:hover img {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* Sections styling */
 section {
-  padding: 1.5rem;
+  padding: 2rem 1rem;
   text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
-.email {
-  display: flex;
-  justify-content: center; /* Center horizontally */
+section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.about, .features, .privacy-policy {
+section:nth-child(odd) {
+  background: var(--section-bg);
+}
+
+.email, .about, .features, .privacy-policy {
   margin: 0 auto;
-  max-width: 900px;
+  /* max-width: 1000px; */
+  position: relative;
+  width: 100%;
+  padding: 0 1rem;
 }
 
+.about p, .features p, .privacy-policy p {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+
+/* Lists */
 ul {
   list-style: none;
   padding: 0;
+  margin: 2rem auto;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 ul li {
-  background: #333;
-  margin: 10px 0;
-  padding: 12px;
-  border-radius: 5px;
+  background: var(--card-bg);
+  margin: 0;
+  padding: 25px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border-left: 3px solid var(--primary-color);
 }
 
+ul li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Links */
 a {
-  color: #ff4500;
+  color: var(--primary-color);
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
 a:hover {
-  color: #ffa500;
+  color: var(--primary-hover);
 }
 
+a:not(.store-button)::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+a:not(.store-button):hover::after {
+  width: 100%;
+}
+
+/* Footer */
 .main-footer {
   text-align: center;
-  padding: 10px;
+  padding: 15px 10px;
   background-color: #111;
+  position: relative;
+}
+
+.main-footer p {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes logoFloat {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
+}
+
+@keyframes titleFade {
+  0% { 
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mobile-specific styles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
   }
 
   p {
     font-size: 1rem;
   }
 
+  .splash-screen {
+    padding: 1rem;
+  }
+
   .splash-screen .logo img {
-    width: 60px;
+    width: 80px;
   }
 
   .store-button {
     width: 90%;
+    padding: 12px 18px;
   }
+
+  section {
+    padding: 3rem 1rem;
+  }
+}
+
+/* Smallest screens */
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .splash-screen .logo img {
+    width: 70px;
+  }
+
+  ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Benefits section */
+.benefits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.benefit-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 22px 18px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.benefit-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.benefit-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color);
+}
+
+.benefit-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  display: inline-block;
+  animation: pulseIcon 2s infinite alternate ease-in-out;
+}
+
+.benefit-item:nth-child(2) .benefit-icon {
+  animation-delay: 0.4s;
+}
+
+.benefit-item:nth-child(3) .benefit-icon {
+  animation-delay: 0.8s;
+}
+
+.benefit-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+}
+
+.benefit-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Strava compatibility */
+.strava-compatibility {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.strava-compatibility img {
+  max-width: 140px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+.strava-compatibility:hover img {
+  transform: scale(1.05);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* Additional animations */
+@keyframes pulseIcon {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Email section specific styling */
+.email {
+  padding: 0rem 0rem;
+  width: 100%;
+}
+
+.email iframe,
+.email form,
+.email div {
+  margin: 0 auto;
+  max-width: 100%;
+  display: block;
+  width: 100%;
+}
+
+/* Remove negative margins between sections */
+section + section {
+  margin-top: 0;
+}
+
+/* Make privacy and license sections a bit more spacious */
+#support, #privacy, #licenses {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+#support h2, #privacy h2, #licenses h2 {
+  margin-bottom: 0.7rem;
+}
+
+#support p, #privacy p, #licenses p {
+  margin-bottom: 0.7rem;
+}
+
+/* Adjust about section spacing */
+#about {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+#about h2 {
+  margin-bottom: 1.2rem;
+  font-size: 2rem;
+}
+
+#about > p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  font-size: 1.15rem;
+}
+
+.benefits {
+  margin-top: 0.5rem;
+}
+
+/* Create a container for email and about section */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Side by side layout for desktop */
+@media only screen and (min-width: 960px) {
+  .content-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  
+  .email {
+    width: 38%;
+    padding: 1rem;
+    align-self: center;
+  }
+  
+  .about {
+    width: 60%;
+    padding: 1rem;
+    text-align: left;
+  }
+  
+  .about h2 {
+    text-align: left;
+  }
+  
+  .about h2::after {
+    left: 0;
+  }
+  
+  .about p {
+    text-align: left;
+  }
+  
+  .benefits {
+    justify-content: flex-start;
+  }
+}
+
+/* Support page specific styles */
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  overflow-x: hidden;
+}
+
+.container ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  gap: 15px;
+  padding: 10px 0;
+  margin: 1.5rem 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.container li {
+  flex: 1 1 0; /* Equal width for all items */
+  min-width: 0; /* Remove min-width to prevent wrapping */
+  max-width: none;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 3px solid var(--primary-color);
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.container li strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+/* For smaller screens */
+@media only screen and (max-width: 900px) {
+  .container ul {
+    flex-wrap: wrap;
+  }
+  
+  .container li {
+    flex-basis: 100%;
+    padding: 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /* Only apply this on desktop */
+  .store-button img[alt="Get it on Google Play"] {
+    height: 88px; 
 }

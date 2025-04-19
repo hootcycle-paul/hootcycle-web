@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="HootCycle - A battery efficient cycling computer app for iOS">
   <title>HootCycle - A Battery Sipping Cycling Computer App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
   <header class="splash-screen">
@@ -17,23 +20,48 @@
     <h1>HootCycle</h1>
     <p>A battery sipping cycling computer app.</p>
     <div class="app-buttons">
-      <a href="https://apps.apple.com/us/app/hootcycle/id6737158892" class="store-button">Download on the App Store!</a>
-      <!-- <a href="#" class="store-button">Get it on Google Play</a> -->
-      <br>
-      <img src="api_logo_cptblWith_strava_stack_white.png" alt="Compatible with Strava">
+      <div class="store-buttons-container">
+        <a href="https://apps.apple.com/us/app/hootcycle/id6737158892" class="store-button">
+          <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.hoot.cycle" class="store-button">
+          <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play">
+        </a>
+      </div>
+      <div class="strava-compatibility">
+        <img src="api_logo_cptblWith_strava_stack_white.png" alt="Compatible with Strava">
+      </div>
     </div>
   </header>
 
-  <section class="email">
+  <section id="email" class="email">
     <script async data-uid="3ada540c14" src="https://hootcycle.kit.com/3ada540c14/index.js"></script>
   </section>
 
-  <section class="about">
+  <section id="about" class="about">
+    
     <h2>About HootCycle</h2>
-    <p>HootCycle is a lightweight cycling computer app designed to minimize battery usage while giving you the data you need on your rides. It supports .fit files for route  navigation and shows speed, grade and ride data.</p>
+    <p>HootCycle is a lightweight cycling computer app designed to minimize battery usage while giving you the data you need on your rides. It supports .fit files for route navigation and shows speed, grade and ride data.</p>
+    <div class="benefits">
+      <div class="benefit-item">
+        <div class="benefit-icon">🔋</div>
+        <h3>Battery Efficient</h3>
+        <p>Designed to minimize power consumption for long rides</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🛣️</div>
+        <h3>Route Support</h3>
+        <p>Import and follow .fit file routes with ease</p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📊</div>
+        <h3>Ride Metrics</h3>
+        <p>Track speed, distance, elevation, and more</p>
+      </div>
+    </div>
   </section>
 
-  <!-- <section class="features">
+  <!-- <section id="features" class="features">
     <h2>App Features</h2>
     <ul>
       <li>Supports .fit file routes</li>
@@ -43,17 +71,17 @@
     </ul>
   </section> -->
 
-  <section class="privacy-policy">
+  <section id="support" class="privacy-policy">
     <h2>Support</h2>
     <p><a href="support.html">Questions? See our support page.</a></p>
   </section>
 
-  <section class="privacy-policy">
+  <section id="privacy" class="privacy-policy">
     <h2>Privacy Policy</h2>
     <p><a href="privacy.html">Read our full privacy policy</a></p>
   </section>
 
-  <section class="privacy-policy">
+  <section id="licenses" class="privacy-policy">
     <h2>License and Attributions</h2>
     <p><a href="LICENSES.html">See license and attributions here.</a></p>
   </section>
@@ -61,5 +89,26 @@
   <footer class="main-footer">
     <p>&copy; 2024 HootCycle. All Rights Reserved.</p>
   </footer>
+
+  <script>
+    // Intersection Observer for revealing sections on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
 </html>
