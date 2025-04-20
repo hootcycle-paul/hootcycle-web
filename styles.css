@@ -190,7 +190,7 @@ section:nth-child(odd) {
 
 .email, .about, .features, .privacy-policy {
   margin: 0 auto;
-  /* max-width: 1000px; */
+  max-width: 1000px;
   position: relative;
   width: 100%;
   padding: 0 1rem;
@@ -367,7 +367,7 @@ a:not(.store-button):hover::after {
   flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
-  margin: 2rem 0;
+  margin: 2rem auto;
   width: 100%;
   max-width: 1000px;
 }
@@ -491,21 +491,27 @@ section + section {
 #about {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  text-align: center;
 }
 
 #about h2 {
   margin-bottom: 1.2rem;
   font-size: 2rem;
+  display: inline-block;
+  text-align: center;
 }
 
 #about > p {
   margin-bottom: 1.5rem;
   line-height: 1.7;
   font-size: 1.15rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 700px;
 }
 
 .benefits {
-  margin-top: 0.5rem;
+  margin: 2rem auto 0.5rem;
 }
 
 /* Create a container for email and about section */
@@ -515,6 +521,7 @@ section + section {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: center;
 }
 
 /* Side by side layout for desktop */
@@ -609,4 +616,31 @@ section + section {
   /* Only apply this on desktop */
   .store-button img[alt="Get it on Google Play"] {
     height: 88px; 
+  }
+}
+
+@media only screen and (max-width: 959px) {
+  #about {
+    text-align: center;
+  }
+  
+  #about h2 {
+    text-align: center;
+  }
+  
+  #about p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .benefits {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .benefit-item {
+    text-align: center;
+  }
 }
